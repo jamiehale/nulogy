@@ -12,10 +12,10 @@ module Nulogy
         food: 0.13,
         electronics: 0.02
       }
-    }
+    }.freeze
 
     it 'is created with a dictionary of rates' do
-      expect{ MarkupCalculator.new( RATES ) }.not_to raise_error
+      expect { MarkupCalculator.new( RATES ) }.not_to raise_error
     end
 
     describe 'invalid rates passed' do
@@ -23,7 +23,7 @@ module Nulogy
       def rates_without( rate )
         rates = {}
         rates[ :flat ] = 7 unless rate == :flat
-        rates[ :people ] = "ham radio" unless rate == :people
+        rates[ :people ] = 'ham radio' unless rate == :people
         rates[ :materials ] = {} unless rate == :materials
         rates
       end
@@ -35,19 +35,19 @@ module Nulogy
       end
 
       it 'raises an error if there is no flat rate' do
-        expect{ MarkupCalculator.new( rates_without( :flat ) ) }.to raise_error( RuntimeError )
+        expect { MarkupCalculator.new( rates_without( :flat ) ) }.to raise_error( RuntimeError )
       end
 
       it 'raises an error if there is no people rate' do
-        expect{ MarkupCalculator.new( rates_without( :people ) ) }.to raise_error( RuntimeError )
+        expect { MarkupCalculator.new( rates_without( :people ) ) }.to raise_error( RuntimeError )
       end
 
       it 'raises an error if there is no materials entry' do
-        expect{ MarkupCalculator.new( rates_without( :materials ) ) }.to raise_error( RuntimeError )
+        expect { MarkupCalculator.new( rates_without( :materials ) ) }.to raise_error( RuntimeError )
       end
 
       it 'raises an error if the materials entry is not indexable' do
-        expect{ MarkupCalculator.new( rates_with_bogus_materials ) }.to raise_error( RuntimeError )
+        expect { MarkupCalculator.new( rates_with_bogus_materials ) }.to raise_error( RuntimeError )
       end
 
     end
@@ -130,32 +130,32 @@ module Nulogy
 
         {
           description: 'Example 1: 1299.99, 3 people, food',
-          base: 1299.99,
+          base: 1_299.99,
           people: 3,
           materials: [ :food ],
-          output: 1591.58
+          output: 1_591.58
         },
         {
           description: 'Example 2: 5432.0, 1 person, drugs (assume pharmaceuticals)',
-          base: 5432.00,
+          base: 5_432.00,
           people: 1,
           materials: [ :pharmaceuticals ],
-          output: 6199.81
+          output: 6_199.81
         },
         {
           description: 'Example 3: 12456.95, 4 people, books',
-          base: 12456.95,
+          base: 12_456.95,
           people: 4,
           materials: [ :books ],
-          output: 13707.63
+          output: 13_707.63
         },
 
         {
           description: 'large amount, multiple people, all known materials, and several new ones',
-          base: 1234567.89,
+          base: 1_234_567.89,
           people: 29,
           materials: [ :food, :clothing, :books, :pharmaceuticals, :electronics, :bicycles, :spaceships ],
-          output: 2039074.06
+          output: 2_039_074.06
         }
       ].each do |example|
         it "says #{example[:description]}" do

@@ -1,0 +1,19 @@
+Metrics/LineLength:
+    Enabled: false
+Metrics/ModuleLength:
+    Enabled: false
+
+Style/SpaceInsideParens:
+    Enabled: false
+Style/SpaceInsideBrackets:
+    Enabled: false
+
+Style/EmptyLinesAroundBlockBody:
+    Enabled: false
+Style/EmptyLinesAroundClassBody:
+    EnforcedStyle: empty_lines
+    Enabled: true
+Style/EmptyLinesAroundModuleBody:
+    EnforcedStyle: empty_lines
+    Enabled: true
+

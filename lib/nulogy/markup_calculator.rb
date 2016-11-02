@@ -1,9 +1,10 @@
 module Nulogy
+
   ##
   # Calculates the markup on a price based on a collection of markups and a
   # set of markup identifiers.
   class MarkupCalculator
-  
+
     def initialize( rates )
       @rates = rates
       validate_rates
@@ -16,10 +17,10 @@ module Nulogy
     private
 
     def validate_rates
-      raise RuntimeError, 'No flat rate defined' unless @rates.has_key? :flat
-      raise RuntimeError, 'No people rate defined' unless @rates.has_key? :people
-      raise RuntimeError, 'No materials defined' unless @rates.has_key? :materials
-      raise RuntimeError, 'Materials are not indexable' unless @rates[ :materials ].respond_to?( :[] )
+      raise 'No flat rate defined' unless @rates.key? :flat
+      raise 'No people rate defined' unless @rates.key? :people
+      raise 'No materials defined' unless @rates.key? :materials
+      raise 'Materials are not indexable' unless @rates[ :materials ].respond_to?( :[] )
     end
 
     def flat_rate
@@ -35,12 +36,12 @@ module Nulogy
     end
 
     def material_rate( material )
-      return @rates[ :materials ][ material ] if @rates[ :materials ].has_key? material
+      return @rates[ :materials ][ material ] if @rates[ :materials ].key? material
       0.00
     end
 
     def materials_rate( materials )
-      materials.inject( 0.00 ) { |r,m| r + material_rate( m ) }
+      materials.inject( 0.00 ) { |a, e| a + material_rate( e ) }
     end
 
     def multiplier_from( rate )
