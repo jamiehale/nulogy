@@ -24,9 +24,17 @@ module Nulogy
       1.00 + people * PEOPLE_RATE
     end
 
+    def pharmaceuticals_rate
+      1.00 + PHARMACEUTICALS_RATE
+    end
+
+    def food_rate
+      1.00 + FOOD_RATE
+    end
+
     def materials_rate( materials )
-      return 1.00 + PHARMACEUTICALS_RATE if materials.include? :pharmaceuticals
-      return 1.00 + FOOD_RATE if materials.include? :food
+      return pharmaceuticals_rate if materials.include? :pharmaceuticals
+      return food_rate if materials.include? :food
       1.00
     end
 
