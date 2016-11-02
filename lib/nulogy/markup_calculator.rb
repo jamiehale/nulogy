@@ -6,6 +6,7 @@ module Nulogy
   
     def initialize( rates )
       @rates = rates
+      validate_rates
     end
 
     def calculate( base_price, people, materials )
@@ -13,6 +14,13 @@ module Nulogy
     end
 
     private
+
+    def validate_rates
+      raise RuntimeError, 'No flat rate defined' unless @rates.has_key? :flat
+      raise RuntimeError, 'No people rate defined' unless @rates.has_key? :people
+      raise RuntimeError, 'No materials defined' unless @rates.has_key? :materials
+      raise RuntimeError, 'Materials are not indexable' unless @rates[ :materials ].respond_to?( :[] )
+    end
 
     def flat_rate
       multiplier_from( @rates[ :flat ] )
