@@ -18,6 +18,40 @@ module Nulogy
       expect{ MarkupCalculator.new( RATES ) }.not_to raise_error
     end
 
+    describe 'invalid rates passed' do
+
+      def rates_without( rate )
+        rates = {}
+        rates[ :flat ] = 7 unless rate == :flat
+        rates[ :people ] = "ham radio" unless rate == :people
+        rates[ :materials ] = {} unless rate == :materials
+        rates
+      end
+
+      def rates_with_bogus_materials
+        rates = RATES.dup
+        rates[ :materials ] = 3.14
+        rates
+      end
+
+      it 'raises an error if there is no flat rate' do
+        expect{ MarkupCalculator.new( rates_without( :flat ) ) }.to raise_error( RuntimeError )
+      end
+
+      it 'raises an error if there is no people rate' do
+        expect{ MarkupCalculator.new( rates_without( :people ) ) }.to raise_error( RuntimeError )
+      end
+
+      it 'raises an error if there is no materials entry' do
+        expect{ MarkupCalculator.new( rates_without( :materials ) ) }.to raise_error( RuntimeError )
+      end
+
+      it 'raises an error if the materials entry is not indexable' do
+        expect{ MarkupCalculator.new( rates_with_bogus_materials ) }.to raise_error( RuntimeError )
+      end
+
+    end
+
     describe 'once created' do
 
       let( :calculator ) { MarkupCalculator.new( RATES ) }
