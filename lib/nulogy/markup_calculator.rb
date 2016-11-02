@@ -9,7 +9,8 @@ module Nulogy
 
     MATERIAL_RATES = {
       pharmaceuticals: 0.075,
-      food: 0.13
+      food: 0.13,
+      electronics: 0.02
     }
 
     def calculate( base_price, people, materials = [] )
