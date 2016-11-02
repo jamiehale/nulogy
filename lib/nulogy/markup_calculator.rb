@@ -8,7 +8,17 @@ module Nulogy
     PEOPLE_RATE = 0.012
 
     def calculate( base_price, people )
-      base_price * ( 1.00 + FLAT_RATE ) * ( 1.00 + people * PEOPLE_RATE )
+      base_price * flat_rate * people_rate( people )
+    end
+
+    private
+
+    def flat_rate
+      1.00 + FLAT_RATE
+    end
+
+    def people_rate( people )
+      1.00 + people * PEOPLE_RATE
     end
 
   end
