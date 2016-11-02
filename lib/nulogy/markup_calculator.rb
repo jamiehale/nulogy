@@ -17,25 +17,33 @@ module Nulogy
     private
 
     def flat_rate
-      1.00 + FLAT_RATE
+      multiplier_from( FLAT_RATE )
     end
 
     def people_rate( people )
-      1.00 + people * PEOPLE_RATE
+      multiplier_from( people * PEOPLE_RATE )
     end
 
     def pharmaceuticals_rate
-      1.00 + PHARMACEUTICALS_RATE
+      multiplier_from( PHARMACEUTICALS_RATE )
     end
 
     def food_rate
-      1.00 + FOOD_RATE
+      multiplier_from( FOOD_RATE )
+    end
+
+    def no_materials_markup
+      1.00
     end
 
     def materials_rate( materials )
       return pharmaceuticals_rate if materials.include? :pharmaceuticals
       return food_rate if materials.include? :food
-      1.00
+      no_materials_markup
+    end
+
+    def multiplier_from( rate )
+      1.00 + rate
     end
 
   end
