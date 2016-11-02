@@ -5,7 +5,7 @@ module Nulogy
   class MarkupCalculator
     
     def calculate( base_price )
-      0.00
+      base_price * 1.05
     end
 
   end
