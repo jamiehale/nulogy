@@ -7,8 +7,10 @@ module Nulogy
     FLAT_RATE = 0.05
     PEOPLE_RATE = 0.012
 
-    PHARMACEUTICALS_RATE = 0.075
-    FOOD_RATE = 0.13
+    MATERIAL_RATES = {
+      pharmaceuticals: 0.075,
+      food: 0.13
+    }
 
     def calculate( base_price, people, materials = [] )
       base_price * flat_rate * people_rate( people ) * materials_rate( materials )
@@ -31,8 +33,7 @@ module Nulogy
     def materials_rate( materials )
       rate = no_materials_markup
       materials.each do |material|
-        rate += PHARMACEUTICALS_RATE if material == :pharmaceuticals
-        rate += FOOD_RATE if material == :food
+        rate += MATERIAL_RATES[ material ]
       end
       rate
     end
