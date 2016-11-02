@@ -10,12 +10,14 @@ module Nulogy
 
     describe 'once created' do
 
+      let( :calculator ) { MarkupCalculator.new }
+
       it 'says free stuff is free' do
-        expect( MarkupCalculator.new.calculate( 0.00 ) ).to eq( 0.00 )
+        expect( calculator.calculate( 0.00 ) ).to eq( 0.00 )
       end
 
       it 'says non-free stuff gets marked up by the flat rate' do
-        expect( MarkupCalculator.new.calculate( 1.00 ) ).to eq( 1.05 )
+        expect( calculator.calculate( 1.00 ) ).to eq( 1.05 )
       end
 
     end
