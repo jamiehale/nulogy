@@ -32,11 +32,7 @@ module Nulogy
     end
 
     def materials_rate( materials )
-      rate = no_materials_markup
-      materials.each do |material|
-        rate += material_rate( material )
-      end
-      rate
+      materials.inject( no_materials_markup ) { |r,m| r + material_rate( m ) }
     end
 
     def multiplier_from( rate )
