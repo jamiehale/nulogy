@@ -93,6 +93,14 @@ module Nulogy
           materials: [ :food, :pharmaceuticals ],
           output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :pharmaceuticals ] + RATES[ :materials ][ :food ] )
         },
+
+        {
+          description: 'Example 1: 1299.99, 3 people, food',
+          base: 1299.99,
+          people: 3,
+          materials: [ :food ],
+          output: 1591.58
+        }
       ].each do |example|
         it "says #{example[:description]}" do
           expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to be_within( 0.001 ).of( example[ :output ] )
