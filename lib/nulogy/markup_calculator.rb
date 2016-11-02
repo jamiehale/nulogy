@@ -34,7 +34,7 @@ module Nulogy
     def materials_rate( materials )
       rate = no_materials_markup
       materials.each do |material|
-        rate += MATERIAL_RATES[ material ]
+        rate += MATERIAL_RATES[ material ] if MATERIAL_RATES.has_key? material
       end
       rate
     end
