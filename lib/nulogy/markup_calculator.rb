@@ -24,14 +24,6 @@ module Nulogy
       multiplier_from( people * PEOPLE_RATE )
     end
 
-    def pharmaceuticals_rate
-      multiplier_from( PHARMACEUTICALS_RATE )
-    end
-
-    def food_rate
-      multiplier_from( FOOD_RATE )
-    end
-
     def no_materials_markup
       1.00
     end
