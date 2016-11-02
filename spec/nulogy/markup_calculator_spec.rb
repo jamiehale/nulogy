@@ -61,6 +61,10 @@ module Nulogy
         expect( calculator.calculate( 1.00, 0, [ :food, :pharmaceuticals ] ) ).to eq( 1.05 * ( 1.00 + 0.13 + 0.075 ) )
       end
 
+      it 'adds 2% for electronics' do
+        expect( calculator.calculate( 1.00, 0, [ :electronics ] ) ).to eq( 1.05 * 1.02 )
+      end
+
     end
 
   end
