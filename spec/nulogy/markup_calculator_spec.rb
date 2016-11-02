@@ -18,7 +18,7 @@ module Nulogy
       expect { MarkupCalculator.new( RATES ) }.not_to raise_error
     end
 
-    describe 'invalid rates passed' do
+    describe 'with invalid rates passed' do
 
       def rates_without( rate )
         rates = {}
@@ -52,76 +52,76 @@ module Nulogy
 
     end
 
-    describe 'once created' do
+    describe 'once created with valid rates' do
 
       let( :calculator ) { MarkupCalculator.new( RATES ) }
 
       [
         {
-          description: 'free stuff is free',
+          description: 'says free stuff is free',
           base: 0.00,
           people: 0,
           materials: [],
           output: 0.00
         },
         {
-          description: 'non-free stuff gets marked up by the flat rate of 5%',
+          description: 'says non-free stuff gets marked up by the flat rate of 5%',
           base: 1.00,
           people: 0,
           materials: [],
           output: 1.00 + RATES[ :flat ]
         },
         {
-          description: '1 person adds a 1.2% markup',
+          description: 'says 1 person adds a 1.2% markup',
           base: 1.00,
           people: 1,
           materials: [],
           output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :people ] )
         },
         {
-          description: '2 people add a 2.4% markup',
+          description: 'says 2 people add a 2.4% markup',
           base: 1.00,
           people: 2,
           materials: [],
           output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + 2 * RATES[ :people ] )
         },
         {
-          description: '100 people adds a 120% markup',
+          description: 'says 100 people adds a 120% markup',
           base: 1.00,
           people: 100,
           materials: [],
           output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + 100 * RATES[ :people ] )
         },
         {
-          description: 'pharmaceuticals add 7.5%',
+          description: 'adds 7.5% for pharmaceuticals',
           base: 1.00,
           people: 0,
           materials: [ :pharmaceuticals ],
           output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :pharmaceuticals ] )
         },
         {
-          description: 'food adds 13%',
+          description: 'adds 13% for food',
           base: 1.00,
           people: 0,
           materials: [ :food ],
           output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :food ] )
         },
         {
-          description: 'electronics adds 2%',
+          description: 'adds 2% for electronics',
           base: 1.00,
           people: 0,
           materials: [ :electronics ],
           output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :electronics ] )
         },
         {
-          description: 'unrecognized materials adds nothing',
+          description: 'adds nothing for unrecognized materials',
           base: 1.00,
           people: 0,
           materials: [ :books ],
           output: 1.00 + RATES[ :flat ]
         },
         {
-          description: 'food and pharmaceuticals adds both 13% and 7.5% (20.5% total)',
+          description: 'adds both 13% and 7.5% (20.5% total) for food and pharmaceuticals',
           base: 1.00,
           people: 0,
           materials: [ :food, :pharmaceuticals ],
@@ -129,21 +129,21 @@ module Nulogy
         },
 
         {
-          description: 'Example 1: 1299.99, 3 people, food',
+          description: 'validates coding challenge example 1: 1299.99, 3 people, food',
           base: 1_299.99,
           people: 3,
           materials: [ :food ],
           output: 1_591.58
         },
         {
-          description: 'Example 2: 5432.0, 1 person, drugs (assume pharmaceuticals)',
+          description: 'validates coding challenge example 2: 5432.0, 1 person, drugs (assume pharmaceuticals)',
           base: 5_432.00,
           people: 1,
           materials: [ :pharmaceuticals ],
           output: 6_199.81
         },
         {
-          description: 'Example 3: 12456.95, 4 people, books',
+          description: 'validates coding challenge example 3: 12456.95, 4 people, books',
           base: 12_456.95,
           people: 4,
           materials: [ :books ],
@@ -151,14 +151,14 @@ module Nulogy
         },
 
         {
-          description: 'large amount, multiple people, all known materials, and several new ones',
+          description: 'handles a large amount, multiple people, all known materials, and several new ones',
           base: 1_234_567.89,
           people: 29,
           materials: [ :food, :clothing, :books, :pharmaceuticals, :electronics, :bicycles, :spaceships ],
           output: 2_039_074.06
         }
       ].each do |example|
-        it "says #{example[:description]}" do
+        it example[ :description ] do
           expect(
             calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] )
           ).to be_within( 0.005 ).of( example[ :output ] )
