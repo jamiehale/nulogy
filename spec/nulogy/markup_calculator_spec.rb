@@ -149,6 +149,14 @@ module Nulogy
           materials: [ :books ],
           output: 13707.63
         },
+
+        {
+          description: 'large amount, multiple people, all known materials, and several new ones',
+          base: 1234567.89,
+          people: 29,
+          materials: [ :food, :clothing, :books, :pharmaceuticals, :electronics, :bicycles, :spaceships ],
+          output: 2039074.06
+        }
       ].each do |example|
         it "says #{example[:description]}" do
           expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to be_within( 0.005 ).of( example[ :output ] )
