@@ -53,6 +53,10 @@ module Nulogy
         expect( calculator.calculate( 1.00, 0, [ :pharmaceuticals ] ) ).to eq( 1.05 * 1.075 )
       end
 
+      it 'adds 13% for food' do
+        expect( calculator.calculate( 1.00, 0, [ :food ] ) ).to eq( 1.05 * 1.13 )
+      end
+
     end
 
   end
