@@ -53,31 +53,46 @@ module Nulogy
           people: 100,
           materials: [],
           output: FLAT_RATE * ( 1.00 + 100 * PEOPLE_RATE )
-        }
+        },
+        {
+          description: 'pharmaceuticals add 7.5%',
+          base: 1.00,
+          people: 0,
+          materials: [ :pharmaceuticals ],
+          output: FLAT_RATE * ( 1.00 + PHARMACEUTICALS_RATE )
+        },
+        {
+          description: 'food adds 13%',
+          base: 1.00,
+          people: 0,
+          materials: [ :food ],
+          output: FLAT_RATE * ( 1.00 + FOOD_RATE )
+        },
+        {
+          description: 'electronics adds 2%',
+          base: 1.00,
+          people: 0,
+          materials: [ :electronics ],
+          output: FLAT_RATE * ( 1.00 + ELECTRONICS_RATE )
+        },
+        {
+          description: 'unrecognized materials adds nothing',
+          base: 1.00,
+          people: 0,
+          materials: [ :books ],
+          output: FLAT_RATE
+        },
+        {
+          description: 'food and pharmaceuticals adds both 13% and 7.5% (20.5% total)',
+          base: 1.00,
+          people: 0,
+          materials: [ :food, :pharmaceuticals ],
+          output: FLAT_RATE * ( 1.00 + PHARMACEUTICALS_RATE + FOOD_RATE )
+        },
       ].each do |example|
         it "says #{example[:description]}" do
-          expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to eq( example[ :output ] )
+          expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to be_within( 0.001 ).of( example[ :output ] )
         end
-      end
-
-      it 'adds 7.5% for pharmaceuticals' do
-        expect( calculator.calculate( 1.00, 0, [ :pharmaceuticals ] ) ).to eq( FLAT_RATE * ( 1.00 + PHARMACEUTICALS_RATE ) )
-      end
-
-      it 'adds 13% for food' do
-        expect( calculator.calculate( 1.00, 0, [ :food ] ) ).to eq( FLAT_RATE * ( 1.00 + FOOD_RATE ) )
-      end
-
-      it 'adds both a 13% -and- 7.5% (20.5% total) for products flagged food and pharmaceuticals' do
-        expect( calculator.calculate( 1.00, 0, [ :food, :pharmaceuticals ] ) ).to eq( FLAT_RATE * ( 1.00 + FOOD_RATE + PHARMACEUTICALS_RATE ) )
-      end
-
-      it 'adds 2% for electronics' do
-        expect( calculator.calculate( 1.00, 0, [ :electronics ] ) ).to eq( FLAT_RATE * ( 1.00 + ELECTRONICS_RATE ) )
-      end
-
-      it 'adds no material rate for other material types' do
-        expect( calculator.calculate( 1.00, 0, [ :books ] ) ).to eq( FLAT_RATE )
       end
 
     end
