@@ -4,13 +4,13 @@ module Nulogy
 
   describe MarkupCalculator do
 
-    it 'exists' do
-      expect{ MarkupCalculator.new }.not_to raise_error
+    it 'is created with a dictionary of rates' do
+      expect{ MarkupCalculator.new( {} ) }.not_to raise_error
     end
 
     describe 'once created' do
 
-      let( :calculator ) { MarkupCalculator.new }
+      let( :calculator ) { MarkupCalculator.new( {} ) }
 
       FLAT_RATE = 1.05
       PEOPLE_RATE = 0.012
