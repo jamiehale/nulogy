@@ -9,7 +9,7 @@ module Nulogy
     end
 
     def calculate( base_price, people, materials )
-      base_price * flat_rate * ( 1.00 + people_rate( people ) + materials_rate( materials ) )
+      base_price * flat_rate * optional_rate( people, materials )
     end
 
     private
@@ -22,8 +22,8 @@ module Nulogy
       people * @rates[ :people ]
     end
 
-    def no_materials_markup
-      1.00
+    def optional_rate( people, materials )
+      multiplier_from( people_rate( people ) + materials_rate( materials ) )
     end
 
     def material_rate( material )
