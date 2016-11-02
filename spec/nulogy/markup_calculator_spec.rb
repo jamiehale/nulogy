@@ -103,7 +103,7 @@ module Nulogy
         }
       ].each do |example|
         it "says #{example[:description]}" do
-          expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to be_within( 0.001 ).of( example[ :output ] )
+          expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to be_within( 0.005 ).of( example[ :output ] )
         end
       end
 
