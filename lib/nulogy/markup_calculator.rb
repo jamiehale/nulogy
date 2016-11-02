@@ -14,6 +14,9 @@ module Nulogy
       }
     }
 
+    def initialize( rates )
+    end
+
     def calculate( base_price, people, materials )
       base_price * flat_rate * people_rate( people ) * materials_rate( materials )
     end
