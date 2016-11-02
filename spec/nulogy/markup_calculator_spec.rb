@@ -22,12 +22,6 @@ module Nulogy
 
       let( :calculator ) { MarkupCalculator.new( RATES ) }
 
-      FLAT_RATE = 1.05
-      PEOPLE_RATE = 0.012
-      PHARMACEUTICALS_RATE = 0.075
-      FOOD_RATE = 0.13
-      ELECTRONICS_RATE = 0.02
-
       [
         {
           description: 'free stuff is free',
@@ -41,63 +35,63 @@ module Nulogy
           base: 1.00,
           people: 0,
           materials: [],
-          output: FLAT_RATE
+          output: 1.00 + RATES[ :flat ]
         },
         {
           description: '1 person adds a 1.2% markup',
           base: 1.00,
           people: 1,
           materials: [],
-          output: FLAT_RATE * ( 1.00 + PEOPLE_RATE )
+          output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :people ] )
         },
         {
           description: '2 people add a 2.4% markup',
           base: 1.00,
           people: 2,
           materials: [],
-          output: FLAT_RATE * ( 1.00 + 2 * PEOPLE_RATE )
+          output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + 2 * RATES[ :people ] )
         },
         {
           description: '100 people adds a 120% markup',
           base: 1.00,
           people: 100,
           materials: [],
-          output: FLAT_RATE * ( 1.00 + 100 * PEOPLE_RATE )
+          output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + 100 * RATES[ :people ] )
         },
         {
           description: 'pharmaceuticals add 7.5%',
           base: 1.00,
           people: 0,
           materials: [ :pharmaceuticals ],
-          output: FLAT_RATE * ( 1.00 + PHARMACEUTICALS_RATE )
+          output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :pharmaceuticals ] )
         },
         {
           description: 'food adds 13%',
           base: 1.00,
           people: 0,
           materials: [ :food ],
-          output: FLAT_RATE * ( 1.00 + FOOD_RATE )
+          output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :food ] )
         },
         {
           description: 'electronics adds 2%',
           base: 1.00,
           people: 0,
           materials: [ :electronics ],
-          output: FLAT_RATE * ( 1.00 + ELECTRONICS_RATE )
+          output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :electronics ] )
         },
         {
           description: 'unrecognized materials adds nothing',
           base: 1.00,
           people: 0,
           materials: [ :books ],
-          output: FLAT_RATE
+          output: 1.00 + RATES[ :flat ]
         },
         {
           description: 'food and pharmaceuticals adds both 13% and 7.5% (20.5% total)',
           base: 1.00,
           people: 0,
           materials: [ :food, :pharmaceuticals ],
-          output: FLAT_RATE * ( 1.00 + PHARMACEUTICALS_RATE + FOOD_RATE )
+          output: ( 1.00 + RATES[ :flat ] ) * ( 1.00 + RATES[ :materials ][ :pharmaceuticals ] + RATES[ :materials ][ :food ] )
         },
       ].each do |example|
         it "says #{example[:description]}" do
