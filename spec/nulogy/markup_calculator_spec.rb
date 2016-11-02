@@ -49,6 +49,10 @@ module Nulogy
         end
       end
 
+      it 'adds 7.5% for pharmaceuticals' do
+        expect( calculator.calculate( 1.00, 0, [ :pharmaceuticals ] ) ).to eq( 1.05 * 1.075 )
+      end
+
     end
 
   end

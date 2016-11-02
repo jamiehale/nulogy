@@ -7,7 +7,7 @@ module Nulogy
     FLAT_RATE = 0.05
     PEOPLE_RATE = 0.012
 
-    def calculate( base_price, people )
+    def calculate( base_price, people, materials = [] )
       base_price * flat_rate * people_rate( people )
     end
 
