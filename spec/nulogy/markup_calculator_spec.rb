@@ -65,6 +65,10 @@ module Nulogy
         expect( calculator.calculate( 1.00, 0, [ :electronics ] ) ).to eq( 1.05 * 1.02 )
       end
 
+      it 'adds no material rate for other material types' do
+        expect( calculator.calculate( 1.00, 0, [ :books ] ) ).to eq( 1.05 )
+      end
+
     end
 
   end
