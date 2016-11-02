@@ -57,6 +57,10 @@ module Nulogy
         expect( calculator.calculate( 1.00, 0, [ :food ] ) ).to eq( 1.05 * 1.13 )
       end
 
+      it 'adds both a 13% -and- 7.5% (20.5% total) for products flagged food and pharmaceuticals' do
+        expect( calculator.calculate( 1.00, 0, [ :food, :pharmaceuticals ] ) ).to eq( 1.05 * ( 1.00 + 0.13 + 0.075 ) )
+      end
+
     end
 
   end
