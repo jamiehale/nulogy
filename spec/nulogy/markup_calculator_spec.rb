@@ -100,7 +100,21 @@ module Nulogy
           people: 3,
           materials: [ :food ],
           output: 1591.58
-        }
+        },
+        {
+          description: 'Example 2: 5432.0, 1 person, drugs (assume pharmaceuticals)',
+          base: 5432.00,
+          people: 1,
+          materials: [ :pharmaceuticals ],
+          output: 6199.81
+        },
+        {
+          description: 'Example 3: 12456.95, 4 people, books',
+          base: 12456.95,
+          people: 4,
+          materials: [ :books ],
+          output: 13707.63
+        },
       ].each do |example|
         it "says #{example[:description]}" do
           expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to be_within( 0.005 ).of( example[ :output ] )
