@@ -1,36 +1,25 @@
 # Nulogy
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nulogy`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is the result of a coding challenge for Nulogy.
 
-TODO: Delete this and the text above, and describe your gem
+The gem includes a single class, MarkupCalculator, that calculates markups on a price given parameters including number of people assigned to the job and the materials involved. Rates are passed in a Hash to constructor.
 
-## Installation
+The rates hash must include :flat, :people, and :materials (a sub-hash of materials mapped to rates).
 
-Add this line to your application's Gemfile:
+(The challenge instructions (coding_exercise.txt) are included in the root of the repo for anyone other than Nulogy looking...)
 
-```ruby
-gem 'nulogy'
-```
+## Installation (Optional)
 
-And then execute:
+NOTE: Installation is not required for testing.
 
-    $ bundle
+After cloning the repo, run:
 
-Or install it yourself as:
+    $ bundle install
+    $ rake build
+    $ gem install pkg/nulogy-0.1.0.gem
 
-    $ gem install nulogy
+## Testing
 
-## Usage
+After cloning the repo, run:
 
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/nulogy.
-
+    $ bundle rspec
