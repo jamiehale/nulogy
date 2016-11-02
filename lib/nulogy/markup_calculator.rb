@@ -8,7 +8,7 @@ module Nulogy
     PEOPLE_RATE = 0.012
 
     def calculate( base_price, people, materials = [] )
-      base_price * flat_rate * people_rate( people )
+      base_price * flat_rate * people_rate( people ) * materials_rate( materials )
     end
 
     private
@@ -19,6 +19,10 @@ module Nulogy
 
     def people_rate( people )
       1.00 + people * PEOPLE_RATE
+    end
+
+    def materials_rate( materials )
+      materials.empty? ? 1.00 : 1.075
     end
 
   end
