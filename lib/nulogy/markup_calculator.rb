@@ -7,6 +7,9 @@ module Nulogy
     FLAT_RATE = 0.05
     PEOPLE_RATE = 0.012
 
+    PHARMACEUTICALS_RATE = 0.075
+    FOOD_RATE = 0.13
+
     def calculate( base_price, people, materials = [] )
       base_price * flat_rate * people_rate( people ) * materials_rate( materials )
     end
@@ -22,8 +25,8 @@ module Nulogy
     end
 
     def materials_rate( materials )
-      return 1.075 if materials.include? :pharmaceuticals
-      return 1.13 if materials.include? :food
+      return 1.00 + PHARMACEUTICALS_RATE if materials.include? :pharmaceuticals
+      return 1.00 + FOOD_RATE if materials.include? :food
       1.00
     end
 
