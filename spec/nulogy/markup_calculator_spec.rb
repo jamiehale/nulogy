@@ -20,6 +20,10 @@ module Nulogy
         expect( calculator.calculate( 1.00 ) ).to eq( 1.05 )
       end
 
+      it 'says 1 person adds a 1.2% markup' do
+        expect( calculator.calculate( 1.00, 1 ) ).to eq( 1.00 * 1.05 * 1.012 )
+      end
+
     end
 
   end

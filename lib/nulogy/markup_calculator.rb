@@ -4,8 +4,8 @@ module Nulogy
   # set of markup identifiers.
   class MarkupCalculator
     
-    def calculate( base_price )
-      base_price * 1.05
+    def calculate( base_price, people = 0 )
+      base_price * 1.05 * ( 1.00 + people * 0.012 )
     end
 
   end
