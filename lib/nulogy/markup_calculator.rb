@@ -37,9 +37,12 @@ module Nulogy
     end
 
     def materials_rate( materials )
-      return pharmaceuticals_rate if materials.include? :pharmaceuticals
-      return food_rate if materials.include? :food
-      no_materials_markup
+      rate = no_materials_markup
+      materials.each do |material|
+        rate += PHARMACEUTICALS_RATE if material == :pharmaceuticals
+        rate += FOOD_RATE if material == :food
+      end
+      rate
     end
 
     def multiplier_from( rate )
