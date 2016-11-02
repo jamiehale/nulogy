@@ -4,17 +4,8 @@ module Nulogy
   # set of markup identifiers.
   class MarkupCalculator
   
-    RATES = {
-      flat: 0.05,
-      people: 0.012,
-      materials: {
-        pharmaceuticals: 0.075,
-        food: 0.13,
-        electronics: 0.02
-      }
-    }
-
     def initialize( rates )
+      @rates = rates
     end
 
     def calculate( base_price, people, materials )
@@ -24,11 +15,11 @@ module Nulogy
     private
 
     def flat_rate
-      multiplier_from( RATES[ :flat ] )
+      multiplier_from( @rates[ :flat ] )
     end
 
     def people_rate( people )
-      multiplier_from( people * RATES[ :people ] )
+      multiplier_from( people * @rates[ :people ] )
     end
 
     def no_materials_markup
@@ -38,7 +29,7 @@ module Nulogy
     def materials_rate( materials )
       rate = no_materials_markup
       materials.each do |material|
-        rate += RATES[ :materials ][ material ] if RATES[ :materials ].has_key? material
+        rate += @rates[ :materials ][ material ] if @rates[ :materials ].has_key? material
       end
       rate
     end
