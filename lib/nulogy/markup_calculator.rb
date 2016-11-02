@@ -9,7 +9,7 @@ module Nulogy
     end
 
     def calculate( base_price, people, materials )
-      base_price * flat_rate * people_rate( people ) * materials_rate( materials )
+      base_price * flat_rate * ( 1.00 + people_rate( people ) + materials_rate( materials ) )
     end
 
     private
@@ -19,7 +19,7 @@ module Nulogy
     end
 
     def people_rate( people )
-      multiplier_from( people * @rates[ :people ] )
+      people * @rates[ :people ]
     end
 
     def no_materials_markup
@@ -32,7 +32,7 @@ module Nulogy
     end
 
     def materials_rate( materials )
-      materials.inject( no_materials_markup ) { |r,m| r + material_rate( m ) }
+      materials.inject( 0.00 ) { |r,m| r + material_rate( m ) }
     end
 
     def multiplier_from( rate )
