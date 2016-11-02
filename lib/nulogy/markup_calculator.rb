@@ -26,10 +26,15 @@ module Nulogy
       1.00
     end
 
+    def material_rate( material )
+      return @rates[ :materials ][ material ] if @rates[ :materials ].has_key? material
+      0.00
+    end
+
     def materials_rate( materials )
       rate = no_materials_markup
       materials.each do |material|
-        rate += @rates[ :materials ][ material ] if @rates[ :materials ].has_key? material
+        rate += material_rate( material )
       end
       rate
     end
