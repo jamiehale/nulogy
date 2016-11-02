@@ -23,35 +23,40 @@ module Nulogy
           description: 'free stuff is free',
           base: 0.00,
           people: 0,
+          materials: [],
           output: 0.00
         },
         {
           description: 'non-free stuff gets marked up by the flat rate of 5%',
           base: 1.00,
           people: 0,
+          materials: [],
           output: FLAT_RATE
         },
         {
           description: '1 person adds a 1.2% markup',
           base: 1.00,
           people: 1,
+          materials: [],
           output: FLAT_RATE * ( 1.00 + PEOPLE_RATE )
         },
         {
           description: '2 people add a 2.4% markup',
           base: 1.00,
           people: 2,
+          materials: [],
           output: FLAT_RATE * ( 1.00 + 2 * PEOPLE_RATE )
         },
         {
           description: '100 people adds a 120% markup',
           base: 1.00,
           people: 100,
+          materials: [],
           output: FLAT_RATE * ( 1.00 + 100 * PEOPLE_RATE )
         }
       ].each do |example|
         it "says #{example[:description]}" do
-          expect( calculator.calculate( example[ :base ], example[ :people ] ) ).to eq( example[ :output ] )
+          expect( calculator.calculate( example[ :base ], example[ :people ], example[ :materials ] ) ).to eq( example[ :output ] )
         end
       end
 

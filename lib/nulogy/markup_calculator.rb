@@ -13,7 +13,7 @@ module Nulogy
       electronics: 0.02
     }
 
-    def calculate( base_price, people, materials = [] )
+    def calculate( base_price, people, materials )
       base_price * flat_rate * people_rate( people ) * materials_rate( materials )
     end
 
