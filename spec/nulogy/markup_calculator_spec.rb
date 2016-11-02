@@ -8,6 +8,14 @@ module Nulogy
       expect{ MarkupCalculator.new }.not_to raise_error
     end
 
+    describe 'once created' do
+
+      it 'says free stuff is free' do
+        expect( MarkupCalculator.new.calculate( 0.00 ) ).to eq( 0.00 )
+      end
+
+    end
+
   end
 
 end
