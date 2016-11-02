@@ -1,5 +1,2 @@
-require "nulogy/version"
-
-module Nulogy
-  # Your code goes here...
-end
+require 'nulogy/version'
+require 'nulogy/markup_calculator'
