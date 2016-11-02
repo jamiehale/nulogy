@@ -22,7 +22,9 @@ module Nulogy
     end
 
     def materials_rate( materials )
-      materials.empty? ? 1.00 : 1.075
+      return 1.075 if materials.include? :pharmaceuticals
+      return 1.13 if materials.include? :food
+      1.00
     end
 
   end
