@@ -165,6 +165,10 @@ module Nulogy
         end
       end
 
+      it 'raises an error if you try to pass a negative amount (assuming this is a bad thing)' do
+        expect { calculator.calculate( -100.00, 0, [] ) }.to raise_error( RuntimeError )
+      end
+
       it 'raises an error if you try to pass a negative people count' do
         expect { calculator.calculate( 1.00, -4, [] ) }.to raise_error( RuntimeError )
       end
