@@ -11,6 +11,7 @@ module Nulogy
     end
 
     def calculate( base_price, people, materials )
+      validate_base_price( base_price )
       validate_people( people )
       base_price * flat_rate * extra_rate( people, materials )
     end
@@ -22,6 +23,10 @@ module Nulogy
       raise 'No people rate defined' unless @rates.key? :people
       raise 'No materials defined' unless @rates.key? :materials
       raise 'Materials are not indexable' unless @rates[ :materials ].respond_to?( :[] )
+    end
+
+    def validate_base_price( base_price )
+      raise 'Invalid base price parameter' if base_price < 0.00
     end
 
     def validate_people( people )
