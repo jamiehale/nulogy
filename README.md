@@ -8,6 +8,8 @@ The rates hash must include :flat, :people, and :materials (a sub-hash of materi
 
 (The challenge instructions (coding_exercise.txt) are included in the root of the repo for anyone other than Nulogy looking...)
 
+Ruby 2.3 recommended, though it passes all tests in 2.2.
+
 ## Installation (Optional)
 
 NOTE: Installation is not required for testing.
